@@ -1,0 +1,82 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a mode type like 'LCL, FCL, Air'" [nzSm]="6" [nzXs]="24" nzRequired nzFor="mode">Mode</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Mode!">
+      <nz-select formControlName="mode">
+        <nz-option nzValue="LCL" nzLabel="LCL"></nz-option>
+        <nz-option nzValue="FCL" nzLabel="FCL"></nz-option>
+        <nz-option nzValue="Air" nzLabel="Air"></nz-option>
+      </nz-select>
+    </nz-form-control>   
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a movement type like 'Door to Door, Port to Door etc.'" [nzSm]="6" [nzXs]="24" nzRequired nzFor="movementType">Movement Type</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Movement Type!">
+    <nz-select formControlName="movementType">
+      <nz-option nzValue="Door To Door" nzLabel="Door To Door"></nz-option>
+      <nz-option nzValue="Port To Door" nzLabel="Port To Door"></nz-option>
+      <nz-option nzValue="Door To Port" nzLabel="Door To Port"></nz-option>
+      <nz-option nzValue="Port To Port" nzLabel="Port To Port"></nz-option>
+    </nz-select>
+  </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a incoterm like 'DAT, DDP'" [nzSm]="6" [nzXs]="24" nzRequired nzFor="incoterm">Incoterms</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Incoterm!">
+      <nz-select formControlName="incoterm">
+        <nz-option nzValue="DDP" nzLabel="Delivered Duty Paid"></nz-option>
+        <nz-option nzValue="DAT" nzLabel="Delivered At Place"></nz-option>
+      </nz-select>
+    </nz-form-control>   
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select destination city" [nzSm]="6" [nzXs]="24" nzRequired nzFor="cityId">Countries Cities</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Country-City!">
+    <nz-select formControlName="cityId" nzShowSearch nzAllowClear nzPlaceHolder="Select a city" [(ngModel)]="selectedCityValue">
+      <nz-option *ngFor="let city of cities" [nzLabel]="city.country.name+ ' - ' + city.name" [nzValue]="city.id"></nz-option>
+    </nz-select>
+    </nz-form-control>  
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select your package type" [nzSm]="6" [nzXs]="24" nzRequired nzFor="packageTypeId">Package Type</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Package Type!">
+      <nz-select formControlName="packageTypeId" [(ngModel)]="selectedPackageTypeValue">
+        <nz-option *ngFor="let package of packageTypes" [nzLabel]="package.name" [nzValue]="package.id"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a measure of length and quantity" [nzSm]="6" [nzXs]="24" nzRequired nzFor="unit1">Unit1</nz-form-label>
+    <nz-select [(ngModel)]="defaultUnit1" formControlName="unit1">
+      <nz-option nzValue="cm" nzLabel="cm"></nz-option>
+      <nz-option nzValue="in" nzLabel="in"></nz-option>
+    </nz-select>
+    
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Unit1!">
+      <input formControlName="unit1Quantity" nzErrorTip="The input is not valid Unit1 Input!" nz-input [(ngModel)]="unit1Input">
+    </nz-form-control>  
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a measure of weight and quantity" [nzSm]="6" [nzXs]="24" nzRequired nzFor="unit2">Unit2</nz-form-label>
+    <nz-select [(ngModel)]="defaultUnit2" formControlName="unit2">
+      <nz-option nzValue="kg" nzLabel="kg"></nz-option>
+      <nz-option nzValue="lb" nzLabel="lb"></nz-option>
+    </nz-select>   
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Unit2!">
+      <input formControlName="unit2Quantity" nz-input [(ngModel)]="unit2Input">
+    </nz-form-control>  
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzTooltipTitle="Please select a currency" [nzSm]="6" [nzXs]="24" nzRequired nzFor="currencyId">Currency</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid Currency!">
+      <nz-select formControlName="currencyId" [(ngModel)]="selectedCurrencyValue">
+        <nz-option *ngFor="let currency of currencies" [nzLabel]="currency.name + ' (' + currency.shortName + ')'" [nzValue]="currency.id"></nz-option>
+      </nz-select>
+    </nz-form-control>   
+  </nz-form-item>
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+      <button nz-button nzType="primary">Save</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

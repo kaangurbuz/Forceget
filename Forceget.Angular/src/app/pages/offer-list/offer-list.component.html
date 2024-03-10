@@ -1,0 +1,28 @@
+<nz-table #offer [nzData]="offers">
+    <thead>
+      <tr>
+        <th>Mode</th>
+        <th>Movement Type</th>
+        <th>Incoterm</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Unit1</th>
+        <th>Unit2</th>
+        <th>Currency</th>
+        <th>Package Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of offer.data">
+        <td>{{ data.mode }}</td>
+        <td>{{ data.movementType }}</td>
+        <td>{{ data.incoterm }}</td>
+        <td>{{ data.country }}</td>
+        <td>{{ data.city }}</td>
+        <td>{{ data.unit1WithQuantity }}</td>
+        <td>{{ data.unit2WithQuantity }}</td>
+        <td>{{ data.currency }}</td>
+        <td>{{ data.packageType }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
